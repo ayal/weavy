@@ -33,5 +33,5 @@ run it once, currently it deletes all docs every time
 `python search.py "gut microbiome"`
 
 # run rag:
-`python rag.py "what do you knwo about gut microbiome"`
+`python rag.py "what do you know about b12?"`
 `python rag.py "kaki"`
