@@ -1,17 +1,83 @@
 dataset = [
     {
         "title": "first paragraph",
-        "text": "Vitamin B12, also known as cobalamin, is a water-soluble vitamin involved in metabolism.[2] It is one of eight B vitamins. It is required by animals, which use it as a cofactor in DNA synthesis, and in both fatty acid and amino acid metabolism.[3] It is important in the normal functioning of the nervous system via its role in the synthesis of myelin, and in the circulatory system in the maturation of red blood cells in the bone marrow.[2][4] Plants do not need cobalamin and carry out the reactions with enzymes that are not dependent on it.[5]",
+        "text":
+        """ANATOMIC CONSIDERATIONS
+The gastrointestinal (GI) tract extends from the mouth to the anus
+and is composed of organs with distinct functions. Sphincters that
+assist in gut compartmentalization separate the organs. The gut wall is
+organized into distinct layers that contribute to regional activities. The
+mucosa is a barrier to luminal contents or a site for fluid and nutrient
+transfer. Smooth muscle in association with the enteric nervous system
+mediates propulsion between regions. Many GI organs possess a serosal layer that provides a supportive foundation and permits external
+input.
+Interactions with other systems serve the needs of the gut and the
+body. Pancreaticobiliary conduits deliver bile and enzymes into the
+duodenum. The vascular supply is modulated by GI activity. Lymphatic
+channels assist in gut immune activities. Intrinsic nerves provide the
+controls for propulsion and fluid regulation. Extrinsic neural input
+provides volitional or involuntary control that is specific for each gut
+region.""",
         "url": "https://www.example.com/first-article"
     },
     {
         "title": "second paragraph",
-        "text": "Vitamin B12 is the most chemically complex of all vitamins.[6][2][7] Only some archaea and bacteria can synthesize vitamin B12.[8] Vitamin B12 deficiency is a widespread condition that is particularly prevalent in populations with low or no consumption of animal foods.[9] Such diets can be due to a variety of reasons, such as low socioeconomic status or personal choice (i.e., veganism, vegetarianism).",
+        "text": """FUNCTIONS OF THE GI TRACT
+The GI tract serves two main functions—assimilating nutrients and
+eliminating waste. In the mouth, food is processed, mixed with salivary
+amylase, and delivered to the gut lumen. The esophagus propels the
+bolus into the stomach; the lower esophageal sphincter prevents oral
+reflux of gastric contents. The squamous esophageal mucosa protects
+against significant diffusion or absorption. Aboral esophageal contractions coordinate with relaxation of the upper and lower esophageal
+sphincters on swallowing.
+The stomach triturates and mixes the food bolus with pepsin and
+acid. Gastric acid also sterilizes the upper gut. The proximal stomach
+serves a storage function by relaxing to accommodate the meal. Phasic
+contractions in the distal stomach propel food residue against the pylorus, where it is ground and thrust proximally for further mixing before
+it is emptied into the duodenum. The stomach secretes intrinsic factor
+for vitamin B
+12 absorption.
+Most nutrient absorption occurs in the small intestine. The mucosal
+villus architecture provides maximal surface area for absorption and is
+endowed with specialized enzymes and transporters. Triturated food
+from the stomach mixes with pancreatic juice and bile in the duodenum. Pancreatic juice contains enzymes for nutrient digestion and
+bicarbonate to optimize the pH for enzyme activation. Bile secreted
+by the liver and stored in the gallbladder is essential for lipid digestion. The proximal intestine is optimized for rapid absorption of most
+nutrients and minerals, whereas the ileum is better suited for absorbing
+vitamin B
+12 and bile acids. Bile contains by-products of erythrocyte
+degradation, toxins, medications, and cholesterol for fecal evacuation.
+Intestinal motor function delivers indigestible residue into the colon
+for processing. The ileocecal junction is a sphincter that prevents
+coloileal reflux, reducing microbial density.
+The colon prepares waste for evacuation. The mucosa dehydrates
+the stool, reducing daily ileal volumes of 1000–1500 mL to 100–200 mL
+expelled from the rectum. The colon possesses a dense bacterial colonization that ferments undigested carbohydrates and short-chain fatty
+acids. The gut microbiome also modulates immune and physiologic
+activity. Esophageal transit takes seconds, and times in the stomach and
+small intestine range from minutes to a few hours, but colon propagation requires >1 day in most individuals. Colon contractions exhibit
+a to-and-fro character that promotes fecal desiccation. The proximal
+colon mixes and absorbs fluid, while the distal colon exhibits peristaltic
+contractions and mass movements to expel the stool. The colon terminates in the anus, which possesses volitional and involuntary controls
+to permit fecal retention until it can be released in a convenient setting""",
         "url": "https://www.example.com/second-article"
     },
     {
         "title": "third paragraph",
-        "text": "Foods containing vitamin B12 include meat, shellfish, liver, fish, poultry, eggs, and dairy products.[2] Many breakfast cereals are fortified with the vitamin.[2] Supplements and medications are available to treat and prevent vitamin B12 deficiency.[2] They are usually taken by mouth, but for the treatment of deficiency may also be given as an intramuscular injection.[2][6]",
+        "text": """EXTRINSIC MODULATION OF GUT
+FUNCTION
+GI function is modified by influences outside the gut. Unlike other
+organs, the gut is in continuity with the outside environment. Protective mechanisms are vigilant against injury from foods, medications,
+toxins, and microbes. Mucosal immune mechanisms include epithelial
+and lamina propria lymphocytes and plasma cells supported by lymph
+node chains to prevent noxious agents from entering the circulation.
+Antimicrobial peptides secreted by Paneth cells defend against pathogens. Drugs and toxins absorbed into the bloodstream are filtered
+and detoxified in the liver via the portal venous circulation. Although
+intrinsic nerves control most basic gut activities, extrinsic neural input
+modulates many functions. Many GI reflexes involve extrinsic vagus
+or splanchnic nerve pathways. The brain-gut axis alters function in
+regions not under volitional regulation. Stress can disrupt gut motor,
+secretory, and sensory function.""",
         "url": "https://www.example.com/third-article"
     }
 ]

@@ -26,8 +26,8 @@ is in dataset_file.py
 run it once, currently it deletes all docs every time
 
 # run search (hybrid)
-`python search.py "what are the foods richest in b12"`
+`python search.py "gut microbiome"`
 
 # run rag:
-`python rag.py "what are the foods richest in b12"`
+`python rag.py "what do you knwo about gut microbiome"`
 `python rag.py "kaki"`
