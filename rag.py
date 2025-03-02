@@ -16,7 +16,7 @@ client = weaviate.connect_to_local(headers={
 
 articles = client.collections.get("Article")
 
-print(f"\n\nQuerying articles with the query:\n\n{query}")
+print(f"\n\nQuerying articles with the query:\n\n{query} and answering the question based on the context\n\n")
 result = (
     articles.generate.hybrid(query=query,
                              limit=10,
