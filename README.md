@@ -1,6 +1,10 @@
 # docs:
 https://weaviate.io/developers/weaviate/quickstart/local
 
+hybrid search and alpha:
+https://weaviate.io/developers/weaviate/search/hybrid#balance-keyword-and-vector-search
+
+
 # install
 pip install -U weaviate-client
 

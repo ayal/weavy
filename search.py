@@ -19,7 +19,7 @@ articles = client.collections.get("Article")
 print ("Querying articles with the query: ", query)
 result = (
     articles.query.hybrid(query=query,
-                          alpha=0.5,
+                          alpha=0.4,
                           return_metadata=MetadataQuery(
                               score=True, explain_score=True),
                           limit=10)

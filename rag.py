@@ -20,6 +20,7 @@ print(f"\n\nQuerying articles with the query:\n\n{query}\nand answering the ques
 result = (
     articles.generate.hybrid(query=query,
                              limit=10,
+                             alpha=0.4,
                              grouped_task=f"answer this question:\n{query}\n---\nbased only on the given context.\nGive links as sources to your response\nif you dont find the answer in the context - say - 'I don't know'."
     )
 )
