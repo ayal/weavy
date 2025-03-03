@@ -37,5 +37,6 @@ run it once, currently it deletes all docs every time
 `python rag.py "kaki"`
 
 # pdf
+`pip install pdfminer.six`
 assume harrison.pdf file in same dir, not included in repo since its too big
 `python readpdf.py`
