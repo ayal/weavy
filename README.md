@@ -35,3 +35,7 @@ run it once, currently it deletes all docs every time
 # run rag:
 `python rag.py "what do you know about b12?"`
 `python rag.py "kaki"`
+
+# pdf
+assume harrison.pdf file in same dir, not included in repo since its too big
+`python readpdf.py`
