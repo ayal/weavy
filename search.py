@@ -23,7 +23,6 @@ result = (
                           return_metadata=MetadataQuery(
                               score=True, explain_score=True),
                           limit=10)
-
 )
 
 print("\n\n\n-------------------- Results --------------------\n\n\n")

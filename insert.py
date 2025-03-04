@@ -13,7 +13,7 @@ client.collections.delete_all()
 client.collections.create(name="Article",
                           vectorizer_config=Configure.Vectorizer.text2vec_openai(
                               model="text-embedding-3-small"),
-                          generative_config=Configure.Generative.openai(model="gpt-4o"))
+                              generative_config=Configure.Generative.openai(model="gpt-4o"))
 
 
 articles = client.collections.get("Article")
@@ -25,9 +25,8 @@ with articles.batch.dynamic() as batch:
             print(f"Insert {counter} / {len(dataset)} ")
 
         properties = {
-            "title": article["title"],
-            "content": article["text"],
-            "url": article["url"]
+            "page": article["page"],
+            "content": article["text"]
         }
 
         print("Adding article: ", properties)

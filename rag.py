@@ -3,40 +3,56 @@ from weaviate.classes.query import MetadataQuery
 import os
 import json
 import sys
+import numpy as np
+from openai import OpenAI
 
 # task query from the process argument i.e python search.py "breakfast cereals"
 if len(sys.argv) < 2:
-    print("Please provide a query as an argument, e.g. python rag.py \"breakfast cereals\"")
+    print("Please provide a query as an argument, e.g. python search.py \"breakfast cereals\"")
     sys.exit(1)
 query = sys.argv[1]
-
-client = weaviate.connect_to_local(headers={
+weaviate_client = weaviate.connect_to_local(headers={
     "X-OpenAI-Api-Key": os.getenv("OPENAI_API_KEY")
 })
 
-articles = client.collections.get("Article")
+articles = weaviate_client.collections.get("Article")
 
-print(
-    f"\n\nQuerying articles with the query:\n\n{query}\n\nand answering the question based on the context\n\n")
+print ("Querying articles with the query: ", query)
 result = (
-    articles.generate.hybrid(query=query,
-                             limit=10,
-                             alpha=0.4,
-                             grouped_task="\n".join([
-                                 "This is the user search-term or query:",
-                                 f"{query}",
-                                 "---",
-                                 "Find the most relevant parts of the given context to the search-term or query",
-                                 "Then give an answer to the search-term or query according to the relevant parts of the context",
-                                 "Always include links as sources to your response, in markdown format",
-                                 "If you cannot find relevant info on the search-term or query - simply say 'I don't know'",
-                             ]),
-                             )
+    articles.query.hybrid(query=query,
+                          alpha=0.4,
+                          return_metadata=MetadataQuery(
+                              score=True, explain_score=True),
+                          limit=10)
 )
 
-print("\n-------------------- RAG Result --------------------\n")
+print("\n\n\n-------------------- Search Results --------------------\n\n\n")
 
-print(result.generated)
+json_context = {"Article": []}
 
+for obj in result.objects:
+    print(json.dumps(obj.properties, indent=2))
+    print("\n\n")
+    print("Score: ", obj.metadata.score)
+    print("Explain Score: ", obj.metadata.explain_score)
+    print("----")
+    json_context["Article"].append(obj.properties)
 
-client.close()  # Free up resources
+print("\n\n\n-------------------- RAG --------------------\n\n\n")
+
+openai_client = OpenAI()
+# print(json.dumps(json_context, indent=2))
+
+completion = openai_client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "You are a strict assistant. Answer only based on the provided context JSON. If the answer is not found, respond with 'I don't know'. Always include the article page in your response."},
+        {"role": "user", "content": f"Context JSON:\n{json_context}\n\nQuestion: {query}"}
+    ]
+)
+
+print("Answer:");
+
+print(completion.choices[0].message)
+
+weaviate_client.close()  # Free up resources
