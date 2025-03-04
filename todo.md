@@ -1,0 +1,5 @@
+- change rag context to markdown
+- calculate usage for both embedding operation and completions and do an intial cost estimation
+- improve pdf reading with logs and batching for more pages
+- optimize it with xpdf
+- improve insert - add logs, not delete everything each time.
