@@ -2,8 +2,9 @@ import json
 from pdfminer.high_level import extract_text
 
 harrison_page1=41
-no_of_pages=3
-page_numbers = [harrison_page1 + i - 1 for i in range(1, no_of_pages)]  # Convert to zero-based indexing
+no_of_pages=10
+start_at_page=940
+page_numbers = [harrison_page1 + i - 1 for i in range(start_at_page, start_at_page+no_of_pages)]  # Convert to zero-based indexing
 
 # Extract all text in a single call
 full_text = extract_text("harrison.pdf", page_numbers=page_numbers)
@@ -16,7 +17,7 @@ texts_by_page = full_text.split("\f")  # pdfminer uses '\f' to separate pages
 
 dataset=[]
 for i, text in enumerate(texts_by_page[:no_of_pages]):  # Show first 5 pages
-    dataset.append({"page":f"{i+1}", "text":text})
+    dataset.append({"page":f"{i+start_at_page}", "text":text})
 
 data_string = json.dumps(dataset, indent=2)
 

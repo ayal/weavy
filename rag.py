@@ -22,8 +22,8 @@ result = (
     articles.query.hybrid(query=query,
                           alpha=0.4,
                           return_metadata=MetadataQuery(
-                              score=True, explain_score=True),
-                          limit=10)
+                            score=True, explain_score=True),
+                            limit=3)
 )
 
 print("\n\n\n-------------------- Search Results --------------------\n\n\n")
