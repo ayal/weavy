@@ -1,3 +1,4 @@
+print("**************\n\nRUN ME WITH:\n\npython -m webapp.server!!!\n\n**************")
 from flask import Flask, request, jsonify, render_template
 from rag import do_rag
 
