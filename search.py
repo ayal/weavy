@@ -34,6 +34,4 @@ for obj in result.objects:
     print("Explain Score: ", obj.metadata.explain_score)
     print("----")
 
-
-
 client.close()  # Free up resources

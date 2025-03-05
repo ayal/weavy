@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify, render_template
-#from rag import answer_question  # Ensure rag.py is in the same directory
+from weavy.rag import do_rag
+import json
 
 def answer_question(question):
-    return """
-# ANSWER
-I dont know
-"""
+    rag_result=do_rag(question, 3)
+    response=rag_result["completion_msg"].content
+    response+="\n\nAdditional References:\n\n"
+    response+=json.dumps(rag_result["articles"], indent=2).replace("\n", "<br>").replace(" ", "&nbsp;")
+    return response
 
 app = Flask(__name__)
 
