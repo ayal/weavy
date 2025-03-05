@@ -8,6 +8,7 @@ webapp:
 - implement answer_question
 - change prompt to respond in markdown including a "link" to the page
 - add "other related sources" (all rag page results) to both the /ask reponse body and the UI.
+- add score to refrences (for dev mode)
 
 logistics:
 - make it a python proejct (poetry?) with all listed deps and version
