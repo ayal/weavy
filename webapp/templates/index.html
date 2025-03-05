@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Ask Harrison</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react-markdown@4.1.0/umd/react-markdown.js" crossorigin></script>
 </head>
 <body>
-    <form id="questionForm">
+    <!-- <form id="questionForm">
         <input type="text" id="question" placeholder="Ask a question..." required>
         <button type="submit">Ask</button>
     </form>
     
-    <div id="answer"></div>
+    <div id="answer"></div> -->
+    <div id="root"></div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+<!--     <script src="{{ url_for('static', filename='script.js') }}"></script> -->    
+        <script type="text/babel" src="{{ url_for('static', filename='app.jsx') }}"></script>
 </body>
 </html>

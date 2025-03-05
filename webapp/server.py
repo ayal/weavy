@@ -1,15 +1,13 @@
 from flask import Flask, request, jsonify, render_template
-from weavy.rag import do_rag
-import json
-
-def answer_question(question):
-    rag_result=do_rag(question, 3)
-    response=rag_result["completion_msg"].content
-    response+="\n\nAdditional References:\n\n"
-    response+=json.dumps(rag_result["articles"], indent=2).replace("\n", "<br>").replace(" ", "&nbsp;")
-    return response
+from rag import do_rag
 
 app = Flask(__name__)
+
+def answer_question(question):
+    rag_result = do_rag(question, 3)
+    answer = rag_result["completion_msg"].content
+    context = rag_result["articles"]
+    return {"answer": answer, "context": context}
 
 @app.route('/')
 def index():
@@ -23,9 +21,9 @@ def ask_question():
     if not question:
         return jsonify({'error': 'No question provided.'}), 400
 
-    answer = answer_question(question)
+    result = answer_question(question)
 
-    return jsonify({'answer': answer})
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)

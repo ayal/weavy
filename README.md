@@ -40,3 +40,15 @@ run it once, currently it deletes all docs every time
 `pip install pdfminer.six`
 assume harrison.pdf file in same dir, not included in repo since its too big
 `python readpdf.py`
+
+# webapp:
+ run from root:
+ `python -m webapp.server`
+
+ # deps:
+ poetry
+ numpy
+ pdfminer.six
+ openai
+ weaviate-client
+ flask
