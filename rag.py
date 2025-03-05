@@ -9,6 +9,16 @@ from openai import OpenAI
 
 prompt_rag="You are a strict assistant. Answer only based on the provided context JSON. If the answer is not found, respond with 'I don't know'. U se markdown. Always include the article page at the end of your response with a newline ans then (page: PAGE)."
 
+def article_to_markdown(index, page, content):
+    md = f"# Source {index}\n\n"
+    md += f"**page: {page}**\n\n"
+    md += "## Content:\n"
+    md += content
+
+    return md
+
+# Example usage
+
 def do_rag(question, articles_no):
     weaviate_client = weaviate.connect_to_local(headers={
         "X-OpenAI-Api-Key": os.getenv("OPENAI_API_KEY")
@@ -28,14 +38,17 @@ def do_rag(question, articles_no):
     print("\n-------------------- Search Results --------------------\n")
 
     json_context = {"Article": []}
-
-    for obj in result.objects:
-        print(json.dumps(obj.properties, indent=2))
+    md_context=""
+    for i, obj in enumerate(result.objects, start=1):
         print("\n")
         print("Score: ", obj.metadata.score)
         print("Explain Score: ", obj.metadata.explain_score)
         print("----")
         json_context["Article"].append(obj.properties)
+        md_context+=article_to_markdown(index=i, page=obj.properties["page"], content=obj.properties["content"])
+        md_context+="\n"
+        
+    print(md_context)
 
     print("\n-------------------- RAG --------------------\n")
 
@@ -45,7 +58,7 @@ def do_rag(question, articles_no):
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": prompt_rag},
-            {"role": "user", "content": f"Context JSON:\n{json_context}\n\nQuestion: {question}"}
+            {"role": "user", "content": f"Context MARKDOWN:\n{md_context}\n\nQuestion: {question}"}
         ],
         temperature=0
     )
@@ -65,7 +78,7 @@ def main():
     print("Answer:")
     print(rag_result["completion_msg"].content)
     print("\nArticles:")
-    print(json.dumps(rag_result["articles"], indent=2))
+    print(rag_result["articles"])
 
 if __name__ == "__main__":
     main()
