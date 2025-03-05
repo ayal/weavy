@@ -7,7 +7,7 @@ import numpy as np
 from openai import OpenAI
 #from prompts import prompt_rag
 
-prompt_rag="You are a strict assistant. Answer only based on the provided context JSON. If the answer is not found, respond with 'I don't know'. Use markdown. Always include the article page at the end of your response with a newline ans then (page: PAGE)."
+prompt_rag="You are a strict assistant. Answer only based on the provided context JSON. If the answer is not found, respond with 'I don't know'. U se markdown. Always include the article page at the end of your response with a newline ans then (page: PAGE)."
 
 def do_rag(question, articles_no):
     weaviate_client = weaviate.connect_to_local(headers={
@@ -46,7 +46,8 @@ def do_rag(question, articles_no):
         messages=[
             {"role": "system", "content": prompt_rag},
             {"role": "user", "content": f"Context JSON:\n{json_context}\n\nQuestion: {question}"}
-        ]
+        ],
+        temperature=0
     )
 
     weaviate_client.close()  # Free up resources
