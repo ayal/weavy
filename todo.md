@@ -3,7 +3,12 @@
 - improve pdf reading with logs and batching for more pages
 - optimize it with xpdf
 - improve insert - add logs, not delete everything each time.
+
 webapp:
 - implement answer_question
 - change prompt to respond in markdown including a "link" to the page
 - add "other related sources" (all rag page results) to both the /ask reponse body and the UI.
+
+logistics:
+- make it a python proejct (poetry?) with all listed deps and version
+- improve readme

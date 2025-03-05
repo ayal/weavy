@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "weavy"
+version = "0.1.0"
+description = ""
+authors = ["ayal <ayalg@wix.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+poetry = "^2.1.1"
+numpy = "^2.2.3"
+pdfminer-six = "^20240706"
+openai = "^1.65.3"
+weaviate-client = "^4.11.1"
+flask = "^3.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
