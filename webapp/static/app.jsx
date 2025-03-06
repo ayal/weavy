@@ -1,31 +1,38 @@
-const { useState } = React;
+import React, { StrictMode, useState, useEffect, } from "https://esm.sh/react";
+import { createRoot } from "https://esm.sh/react-dom/client";
+import ReactMarkdown from 'https://esm.sh/react-markdown'
+import rehypeRaw from "https://esm.sh/rehype-raw";
+import remarkGfm from "https://esm.sh/remark-gfm";
+import remarkBreaks from "https://esm.sh/remark-breaks";
+
+const fixPageFormatting = (text) => {
+    // Find chapter patterns and fix:
+    // For example: 9\n\nC\nH\nA\nP\nT\nE\nR\n2\n\nP\nr\no\nm\no\nt\ni\nn\ng\nG\no\o\nd\nH\ne\na\nl\nt\nh\n\n
+    // Extract chapter number and title
+    const chapterPattern = /(\d+)\n\nC\nH\nA\nP\nT\nE\nR\n(\d+)\n\n(.*?)\n\n/gims;
+    return text.replace(chapterPattern, (match, p1, p2, p3) => {
+        const chapterTitle = p3.replace(/\n/g, '');
+        return `Chapter ${p2}: ${chapterTitle}\n\n`;
+    });
+};
 
 const ArticleReference = ({ content, url, page }) => {
     const [open, setOpen] = useState(false);
 
     return (
         <div className="border-b border-gray-200 py-2">
-            <button
-                onClick={() => setOpen(!open)}
-                className="flex justify-between items-center w-full text-left font-medium text-gray-800 hover:text-blue-600"
-            >
+            <div className="flex justify-between items-center w-full text-left font-medium text-gray-800 hover:text-blue-600">
                 <span>Page: {page}</span>
-                <a href={`/book?page=${page}`} target="_blank" rel="noopener noreferrer" className="break-words">
-                    {`/book?page=${page}`}
-                </a>
-                <span>{open ? '▲' : '▼'}</span>
-            </button>
+                <button onClick={() => setOpen(!open)} className="ml-2">
+                    <span>{open ? '▲' : '▼'}</span>
+                </button>
+            </div>
+            <a href={url} target="_blank" rel="noopener noreferrer" className="block break-words text-blue-600 mt-1">
+                {url}
+            </a>
             {open && (
                 <div className="mt-2 pl-4">
-                    <div className="text-gray-600 mb-2">{content}</div>
-                    <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline break-words"
-                    >
-                        { }
-                    </a>
+                    <pre className="text-gray-600 mb-2 whitespace-pre-wrap">{fixPageFormatting(content)}</pre>
                 </div>
             )}
         </div>
@@ -89,8 +96,15 @@ const QuestionForm = () => {
         setLoading(false);
     };
 
+    if (answer) {
+        console.log('answer is:\n\n', answer);
+    }
+
     return (
         <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
+            <div>
+
+            </div>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                     type="text"
@@ -127,7 +141,15 @@ const QuestionForm = () => {
 
             {answer && (
                 <div id="answer" className="mt-6 prose prose-blue">
-                    <ReactMarkdown>{answer}</ReactMarkdown>
+                    <div>
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm, remarkBreaks]}
+                            rehypePlugins={[rehypeRaw]}
+                            
+                        >
+                            {answer}
+                        </ReactMarkdown>
+                    </div>
 
                     {articles.length > 0 && (
                         <div className="mt-6">
@@ -138,7 +160,7 @@ const QuestionForm = () => {
                                         key={idx}
                                         content={article.content}
                                         page={article.page}
-                                        url={`https://guy-harrison.com/page/${article.page}`}
+                                        url={`/book?page=${article.page}`}
                                     />
                                 ))}
                             </div>
@@ -152,5 +174,5 @@ const QuestionForm = () => {
 
 
 const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container);
+const root = createRoot(container);
 root.render(<QuestionForm />);

@@ -7,7 +7,32 @@ import numpy as np
 from openai import OpenAI
 #from prompts import prompt_rag
 
-prompt_rag="You are a strict assistant. Answer only based on the provided context JSON. If the answer is not found, respond with 'I don't know'. U se markdown. Always include the article page at the end of your response with a newline ans then (page: PAGE)."
+prompt_rag = "\n".join([
+    # "You are a strict assistant. Answer only based on the provided context JSON.",
+    "You are a medical assistant. You answer only based on a provided context and a question.",
+    "If the answer is not found in the context, respond with 'I don't know'.",
+    "Use markdown format in your response, include a link to the referenced articles at the end of your response.",
+#    "Always include the article page at the end of your response with a newline",
+# "and then (page: PAGE)."
+])
+
+user_msg = "\n".join([
+    "# Instructions:",
+    "1. First go over all articles in the context one by one and mention for each:"
+    "  a. How relevant it is to the question.",
+    "  b. Include one very short sentence regarding what is relevant in the article"
+    "  c. include a markdown link to the page in this format: [page](/book?page=PAGE)",
+    "2. Then answer the question in a detailed medical manner based on the context and the user question.",
+    "# Response Format:",
+    "---",
+    "# Your Response Markdown Format:",
+    "# Sources:",
+    "Source 1: Very relevant. The article mentions the history of breakfast cereals. [link](/book?page=1)",
+    "Source 2: Not relevant. The article mentions the history of lunch cereals. [link](/book?page=2)",
+    '---'
+    "# Answer:",
+    "<The detailed medical answer to the user question.>",
+])
 
 def article_to_markdown(index, page, content):
     md = f"# Source {index}\n\n"
@@ -58,12 +83,18 @@ def do_rag(question, articles_no):
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": prompt_rag},
-            {"role": "user", "content": f"Context MARKDOWN:\n{md_context}\n\nQuestion: {question}"}
+            {"role": "user", "content": f"Context:\n\n{md_context}\n\n---\n\nQuestion:\n\n{question}\n\n---\n\n---\n\n{user_msg}"}
         ],
+        max_tokens=1500,
         temperature=0
     )
 
     weaviate_client.close()  # Free up resources
+
+    print("\n\nCompletion Answer:\n\n")
+    print(completion.choices[0].message.content)
+    print("\n\n")
+
 
     return ({"completion_msg":completion.choices[0].message, "articles":json_context})
 

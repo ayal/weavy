@@ -40,10 +40,18 @@ run it once, currently it deletes all docs every time
 `pip install pdfminer.six`
 assume harrison.pdf file in same dir, not included in repo since its too big
 `python readpdf.py`
+`python readpdf.py --pages=50 --start=1`
 
 # webapp:
  run from root:
  `python -m webapp.server`
+
+/: main ui for asking questions
+/ask: api (POST, pass question as payload)
+/book: ui for viewing one of the book pages (a json file needs to be in output_pages dir, use readpdf.py)
+/page: api for getting a page data, gets page as query param and returns page json from output_pages
+`http://127.0.0.1:5000/book?page=14`
+
 
  # deps:
  poetry (manager)

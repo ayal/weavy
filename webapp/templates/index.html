@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Ask Harrison</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/react-markdown@4.1.0/umd/react-markdown.js" crossorigin></script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+          h1 {
+            @apply text-3xl font-bold my-4;
+          }
+          h2 {
+            @apply text-2xl font-semibold my-3;
+          }
+          h3 {
+            @apply text-xl font-semibold my-2;
+          }
+          h4 {
+            @apply text-lg font-semibold my-2;
+          }
+
+          a {
+            @apply text-blue-500 hover:underline;
+          }
+        }
+      </style>
 </head>
+
 <body>
+
     <!-- <form id="questionForm">
         <input type="text" id="question" placeholder="Ask a question..." required>
         <button type="submit">Ask</button>
@@ -19,7 +40,8 @@
     <div id="answer"></div> -->
     <div id="root"></div>
 
-<!--     <script src="{{ url_for('static', filename='script.js') }}"></script> -->    
-        <script type="text/babel" src="{{ url_for('static', filename='app.jsx') }}"></script>
+    <!--     <script src="{{ url_for('static', filename='script.js') }}"></script> -->
+    <script data-type="module" type="text/babel" src="{{ url_for('static', filename='app.jsx') }}"></script>
 </body>
+
 </html>
