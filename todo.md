@@ -13,3 +13,8 @@ webapp:
 logistics:
 - make it a python proejct (poetry?) with all listed deps and version
 - improve readme
+
+
+weavitate:
+- read docs see all options
+- consider reranking: https://weaviate.io/developers/weaviate/search/rerank

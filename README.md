@@ -46,9 +46,14 @@ assume harrison.pdf file in same dir, not included in repo since its too big
  `python -m webapp.server`
 
  # deps:
- poetry
+ poetry (manager)
  numpy
- pdfminer.six
- openai
- weaviate-client
- flask
+ pdfminer.six (pdf reader)
+ openai 
+ weaviate-client (vector db)
+ flask (web server)
+
+React
+React markdownnv 
+Tailwind
+
