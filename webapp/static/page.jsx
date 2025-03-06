@@ -1,5 +1,16 @@
 const { useState, useEffect } = React;
 
+const fixPageFormatting = (text) => {
+    // Find chapter patterns and fix:
+    // For example: 9\n\nC\nH\nA\nP\nT\nE\nR\n2\n\nP\nr\no\nm\no\nt\ni\nn\ng\nG\no\o\nd\nH\ne\na\nl\nt\nh\n\n
+    // Extract chapter number and title
+    const chapterPattern = /(\d+)\n\nC\nH\nA\nP\nT\nE\nR\n(\d+)\n\n(.*?)\n\n/gims;
+    return text.replace(chapterPattern, (match, p1, p2, p3) => {
+        const chapterTitle = p3.replace(/\n/g, '');
+        return `Chapter ${p2}: ${chapterTitle}\n\n`;
+    });
+};
+
 const Page = () => {
     const [pageData, setPageData] = useState(null);
 
@@ -15,12 +26,14 @@ const Page = () => {
         }
     }, []);
 
+    const formattedText = pageData ? fixPageFormatting(pageData.text) : null;
+
     return (
         <div>
             {pageData ? (
                 <div>
                     <h1>{pageData.page}</h1>
-                    <ReactMarkdown>{pageData.text}</ReactMarkdown>
+                    <pre>{formattedText}</pre>
                 </div>
             ) : (
                 <p>Loading...</p>

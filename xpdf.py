@@ -3,6 +3,8 @@ import os
 import json
 import time
 
+start_at_page = 50
+
 def format_time(seconds):
     if seconds >= 3600:
         hours = int(seconds // 3600)
@@ -27,8 +29,10 @@ def extract_text_from_pdf(pdf_path, output_dir, progress_file):
             num_pages = int(line.split(':')[1].strip())
             break
     
-    # Read the last processed page from the progress file
-    if os.path.exists(progress_file):
+    # Determine the starting page
+    if start_at_page > 0:
+        last_processed_page = start_at_page - 1
+    elif os.path.exists(progress_file):
         with open(progress_file, 'r') as f:
             last_processed_page = int(f.read().strip())
     else:
@@ -40,7 +44,7 @@ def extract_text_from_pdf(pdf_path, output_dir, progress_file):
         start_time = time.time()
         
         output_file = os.path.join(output_dir, f'page_{page}.json')
-        result = subprocess.run(['pdftotext', '-f', str(page), '-l', str(page), pdf_path, '-'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='latin1')
+        result = subprocess.run(['pdftotext', '-layout', '-f', str(page), '-l', str(page), pdf_path, '-'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='latin1')
         text = result.stdout
         data = {
             'text': text,

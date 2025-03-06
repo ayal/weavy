@@ -10,8 +10,8 @@ const ArticleReference = ({ content, url, page }) => {
                 className="flex justify-between items-center w-full text-left font-medium text-gray-800 hover:text-blue-600"
             >
                 <span>Page: {page}</span>
-                <a href={`https://guy-harrison.com/page/${page}`} target="_blank" rel="noopener noreferrer" className="break-words">
-                    {`https://guy-harrison.com/page/${page}`}
+                <a href={`/book?page=${page}`} target="_blank" rel="noopener noreferrer" className="break-words">
+                    {`/book?page=${page}`}
                 </a>
                 <span>{open ? '▲' : '▼'}</span>
             </button>
