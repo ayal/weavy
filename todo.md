@@ -22,3 +22,8 @@ weavitate:
 pdf:
 - fix formatting, for example: 9\n\nC\nH\nA\nP\nT\nE\nR\n2\n\nP\nr\no\nm\no\nt\ni\nn\ng\nG\no\no\nd\nH\ne\na\nl\nt\nh\n\n
 - identify structure, separate to sections
+
+prompt eng and more ai stuff:
+- see changes made to prompt
+- read about "chain of thought"
+- consider using more advanced techniques: https://jina.ai/news/query-expansion-with-llms-searching-better-by-saying-more/

@@ -62,6 +62,22 @@ const QuestionForm = () => {
         "Show relevant protocol for meningitis treatment",
     ];
 
+    // Open all links in new tab
+    useEffect(() => {
+        const handleLinkClick = (event) => {
+            if (event.target.tagName === 'A' && event.target.href) {
+                event.preventDefault();
+                window.open(event.target.href, '_blank');
+            }
+        };
+
+        document.addEventListener('click', handleLinkClick);
+
+        return () => {
+            document.removeEventListener('click', handleLinkClick);
+        };
+    }, []);
+
     const handleSubmit = async (e, selectedQuestion) => {
         if (e) e.preventDefault();
         const query = selectedQuestion || question;
@@ -145,7 +161,7 @@ const QuestionForm = () => {
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm, remarkBreaks]}
                             rehypePlugins={[rehypeRaw]}
-                            
+
                         >
                             {answer}
                         </ReactMarkdown>
@@ -171,6 +187,8 @@ const QuestionForm = () => {
         </div>
     );
 };
+
+
 
 
 const container = document.getElementById('root');
