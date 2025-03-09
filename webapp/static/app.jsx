@@ -39,7 +39,6 @@ const ArticleReference = ({ content, url, page }) => {
     );
 };
 
-
 const SuggestedQuestion = ({ question, onSelect }) => (
     <button
         onClick={() => onSelect(question)}
@@ -187,8 +186,6 @@ const QuestionForm = () => {
         </div>
     );
 };
-
-
 
 
 const container = document.getElementById('root');

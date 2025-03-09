@@ -23,7 +23,6 @@ user_msg = "\n".join([
     "  b. Include one very short sentence regarding what is relevant in the article"
     "  c. include a markdown link to the page in this format: [page N](/book?page=N)",
     "2. Then answer the question in a detailed medical manner based on the context and the user question.",
-    "# Response Format:",
     "---",
     "# Your Response Markdown Format:",
     "# Sources:",
@@ -46,13 +45,20 @@ def article_to_markdown(index, page, content):
 # Example usage
 
 def do_rag(question, articles_no):
-    weaviate_client = weaviate.connect_to_local(headers={
-        "X-OpenAI-Api-Key": os.getenv("OPENAI_API_KEY")
-    })
+    weaviate_client = weaviate.connect_to_local(
+        headers={
+            "X-OpenAI-Api-Key": os.getenv("OPENAI_API_KEY")
+        }
+    )
 
+    if not weaviate_client.is_ready():
+        print ("Weaviat client failed to connect")
+        return ({})
+
+    print("Connected to Weaviat client")
     articles = weaviate_client.collections.get("Article")
 
-    print ("Querying articles with the query: ", question)
+    print("Querying articles with the query: ", question)
     result = (
         articles.query.hybrid(query=question,
                             alpha=0.4,
@@ -95,7 +101,6 @@ def do_rag(question, articles_no):
     print("\n\nCompletion Answer:\n\n")
     print(completion.choices[0].message.content)
     print("\n\n")
-
 
     return ({"completion_msg":completion.choices[0].message, "articles":json_context})
 

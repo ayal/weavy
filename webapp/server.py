@@ -1,7 +1,8 @@
 print("**************\n\nRUN ME WITH:\n\npython -m webapp.server!!!\n\n**************")
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
 from rag import do_rag
 import json
+import os
 
 app = Flask(__name__)
 
@@ -47,6 +48,12 @@ def get_page():
         return jsonify({'error': 'Page not found.'}), 404
 
     return jsonify(data)
+
+# display a pdf viewer with lazy loading and go to a page 
+# http://host.com/pdf?page={page}
+@app.route('/pdf')
+def get_pdf():
+    return render_template('pdf.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

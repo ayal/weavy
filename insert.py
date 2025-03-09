@@ -15,7 +15,6 @@ client.collections.create(name="Article",
                               model="text-embedding-3-small"),
                               generative_config=Configure.Generative.openai(model="gpt-4o"))
 
-
 articles = client.collections.get("Article")
 
 counter = 0
@@ -29,8 +28,12 @@ with articles.batch.dynamic() as batch:
             "content": article["text"]
         }
 
-        print("Adding article: ", properties)
-        batch.add_object(properties)
+        print("Adding article: ", properties["page"])
+        try:
+            batch.add_object(properties)
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+
         counter = counter + 1
 
 print("Inserting Articles complete")
