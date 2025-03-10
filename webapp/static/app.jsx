@@ -16,7 +16,7 @@ const fixPageFormatting = (text) => {
     });
 };
 
-const ArticleReference = ({ content, url, page }) => {
+const ArticleReference = ({ content, url, url_raw, page }) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -29,6 +29,9 @@ const ArticleReference = ({ content, url, page }) => {
             </div>
             <a href={url} target="_blank" rel="noopener noreferrer" className="block break-words text-blue-600 mt-1">
                 {url}
+            </a>
+            <a href={url_raw} target="_blank" rel="noopener noreferrer" className="block break-words text-blue-600 mt-1">
+                {url_raw}
             </a>
             {open && (
                 <div className="mt-2 pl-4">
@@ -64,9 +67,17 @@ const QuestionForm = () => {
     // Open all links in new tab
     useEffect(() => {
         const handleLinkClick = (event) => {
+            console.log(event);  // Debug print
             if (event.target.tagName === 'A' && event.target.href) {
+                console.log("DEBUG TEST");  // Debug print
                 event.preventDefault();
-                window.open(event.target.href, '_blank');
+                
+                // When clicking the pdf link, open a named window and to reuse the same tab
+                if (event.target.href.includes("pdf")) {
+                    window.open(event.target.href, 'pdf');
+                } else {
+                    window.open(event.target.href, '_blank');
+                }
             }
         };
 
@@ -175,7 +186,8 @@ const QuestionForm = () => {
                                         key={idx}
                                         content={article.content}
                                         page={article.page}
-                                        url={`/book?page=${article.page}`}
+                                        url_raw={`/book?page=${article.page}`}
+                                        url={`/pdf?page=${article.page}`}
                                     />
                                 ))}
                             </div>

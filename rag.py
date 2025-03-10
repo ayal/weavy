@@ -21,17 +21,17 @@ user_msg = "\n".join([
     "1. First go over all articles in the context one by one and mention for each:"
     "  a. How relevant it is to the question.",
     "  b. Include one very short sentence regarding what is relevant in the article"
-    "  c. include a markdown link to the page in this format: [page N](/book?page=N)",
+    "  c. include two markdown links to the page in this format: [page N](/pdf?page=N)/[raw](/book?page=N)",
     "2. Then answer the question in a detailed medical manner based on the context and the user question.",
     "---",
     "# Your Response Markdown Format:",
     "# Sources:",
-    "Source 1: Very relevant. The article mentions the history of breakfast cereals. [page N](/book?page=N)",
-    "Source 2: Not relevant. The article mentions the history of lunch cereals. [page M](/book?page=M)",
+    "Source 1: Very relevant. The article mentions the history of breakfast cereals. [page N](/pdf?page=N)/[raw](/book?page=N)",
+    "Source 2: Not relevant. The article mentions the history of lunch cereals. [page M](/pdf?page=M)/[raw](/book?page=M)",
     '---'
     "# Answer:",
     "<The detailed medical answer to the user question.>",
-    "Sources: [page 1](/book?page=1), [page N](/book?page=N), [page M](/book?page=M)"
+    "Sources: [page 1](/pdf?page=1)/[raw](/book?page=1), [page N](/pdf?page=N)/[raw](/book?page=N), [page M](/pdf?page=M)/[raw](/book?page=M)"
 ])
 
 def article_to_markdown(index, page, content):
